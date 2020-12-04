@@ -1,0 +1,20 @@
+addition = (2 + 2)
+multiplication = (5 * 6)
+subtraction = (50 - multiplication)
+division = (subtraction / 4)
+division2 = (8 / 5)             # division always returns a floating point number
+division3 = (17 // 3)           # floor division discards the fractional part
+remainder = (17 % 3)            # the % operator returns the remainder of the division
+squared = (5 ** 2)              # 5 squared
+powerof = (2 ** 7)              # 2 to the power of 7
+floatpoint = (4 * 3.75 - 1)     # Operators with mixed type operands convert the integer operand to floating point
+
+print(f"Addition of (2 + 2)={addition}")
+print(f"Multiplication of (5 * 6)={multiplication}")
+print(f"Subtraction of (50 - 5 * 6)={subtraction}")
+print(f"Division always returns a floating point number: (8 / 5)={division2}")
+print(f"Floor division discards the fractional part: (17 // 3)={division3}")
+print(f"The operator % returns the remainder of the division: (17 % 3)={remainder}")
+print(f"It is possible to use the ** operator to calculate powers: 5 squared(5 ** 2) ={squared}")
+print(f"To calculate 2 to the power of 7: (2 ** 7)={powerof}")
+print(f"Operators with mixed type operands convert the integer operand to floating point: (4 * 3.75 - 1)={floatpoint}")

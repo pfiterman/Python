@@ -61,11 +61,25 @@ The nuget.org packages are lightweight installations intended for continuous int
 
 The embeddable package is a minimal package of Python suitable for embedding into a larger application.
 
-### The Full Installer
+### Using Python on Windows
 - [Installation Steps](#installation-steps)
 - [Removing the MAX_PATH Limitation](#removing-the-max_path-limitation)
 - [The Microsoft Store Package](#the-microsoft-store-package)
+- [Alternative bundles](#alternative-bundles)
+- [Configuring Python](#configuring-python)
+- [Excursus: Setting environment variables](#excursus--setting-environment-python)
+- [Finding the Python executable](#finding-the-python-executable)
+- [UTF-8 mode](#utf-8-mode)
 
+### Getting started
+- [Invoking the Python Interpreter](#invoking-the-python-interpreter)
+- [Argument Passing](#argument-passing)
+- [Interactive Mode](#interactive-mode)
+
+### An Informal Introduction to Python
+- [Comments](#comments)
+- [Variables](#variables)
+- [Numbers](#numbers)
 
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
@@ -98,7 +112,7 @@ This allows the open() function, the os module and most other path functionality
 
 Changed in version 3.6: Support for long paths was enabled in Python.
 
-#### The Microsoft Store Package
+### The Microsoft Store Package
 The Microsoft Store package is an easily installable Python interpreter that is intended mainly for interactive use, for example, by students.
 
 To install the package, ensure you have the latest Windows 10 updates and search the Microsoft Store app for “Python 3.9”. Ensure that the app you select is published by the Python Software Foundation, and install it.
@@ -114,3 +128,222 @@ If you have installed another version of Python and added it to your PATH variab
 The py.exe launcher will detect this Python installation, but will prefer installations from the traditional installer.
 
 To remove Python, open Settings and use Apps and Features, or else find Python in Start and right-click to select Uninstall. Uninstalling will remove all packages you installed directly into this Python installation, but will not remove any virtual environments
+
+- [Known Issues]
+Because of restrictions on Microsoft Store apps, Python scripts may not have full write access to shared locations such as TEMP and the registry. Instead, it will write to a private copy. If your scripts must modify the shared locations, you will need to install the full installer.
+
+### Alternative Bundles
+Besides the standard CPython distribution, there are modified packages including additional functionality. The following is a list of popular versions and their key features:
+
+- [ActivePython](https://www.activestate.com/activepython/) : Installer with multi-platform compatibility, documentation, PyWin32
+- [Anaconda](https://www.anaconda.com/download/) : Popular scientific modules (such as numpy, scipy and pandas) and the conda package manager.
+- [Canopy](https://www.enthought.com/product/canopy/) : A “comprehensive Python analysis environment” with editors and other development tools.
+- [WinPython](https://winpython.github.io/) : Windows-specific distribution with prebuilt scientific packages and tools for building packages.
+
+Note that these packages may not include the latest versions of Python or other libraries, and are not maintained or supported by the core Python team.
+
+### Configuring Python
+To run Python conveniently from a command prompt, you might consider changing some default environment variables in Windows. While the installer provides an option to configure the PATH and PATHEXT variables for you, this is only reliable for a single, system-wide installation. If you regularly use multiple versions of Python, consider using the [Python Launcher for Windows](https://docs.python.org/3/using/windows.html#launcher).
+
+#### Excursus: Setting environment variables
+Windows allows environment variables to be configured permanently at both the User level and the System level, or temporarily in a command prompt. To temporarily set environment variables, open Command Prompt and use the set command:
+
+```Python
+C:\>set PATH=C:\Program Files\Python 3.9;%PATH%
+C:\>set PYTHONPATH=%PYTHONPATH%;C:\My_python_lib
+C:\>python
+```
+
+These changes will apply to any further commands executed in that console, and will be inherited by any applications started from the console.
+
+Including the variable name within percent signs will expand to the existing value, allowing you to add your new value at either the start or the end. Modifying PATH by adding the directory containing python.exe to the start is a common way to ensure the correct version of Python is launched.
+
+To permanently modify the default environment variables, click Start and search for ‘edit environment variables’, or open System properties, Advanced system settings and click the Environment Variables button. In this dialog, you can add or modify User and System variables. To change System variables, you need non-restricted access to your machine (i.e. Administrator rights).
+
+```Note
+Note Windows will concatenate User variables after System variables, which may cause unexpected results when modifying PATH.
+The PYTHONPATH variable is used by all versions of Python 2 and Python 3, so you should not permanently configure this variable unless it only includes code that is compatible with all of your installed Python versions.
+```
+
+#### Finding the Python executable
+Besides using the automatically created start menu entry for the Python interpreter, you might want to start Python in the command prompt. The installer has an option to set that up for you.
+
+On the first page of the installer, an option labelled “Add Python to PATH” may be selected to have the installer add the install location into the PATH. The location of the Scripts\ folder is also added. This allows you to type python to run the interpreter, and pip for the package installer. Thus, you can also execute your scripts with command line options, see [Command line](https://docs.python.org/3/using/cmdline.html#using-on-cmdline) documentation.
+
+If you don’t enable this option at install time, you can always re-run the installer, select Modify, and enable it. Alternatively, you can manually modify the PATH using the directions in [Excursus: Setting environment variables](#excursus--setting-environment-variables). You need to set your PATH environment variable to include the directory of your Python installation, delimited by a semicolon from other entries. An example variable could look like this (assuming the first two entries already existed):
+
+```Python
+C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Python 3.9
+```
+
+#### UTF-8 Mode
+Windows still uses legacy encodings for the system encoding (the ANSI Code Page). Python uses it for the default encoding of text files (e.g. locale.getpreferredencoding(). This may cause issues because UTF-8 is widely used on the internet and most Unix systems, including WSL (Windows Subsystem for Linux).
+
+You can use UTF-8 mode to change the default text encoding to UTF-8. You can enable UTF-8 mode via the `-X utf8` command line option, or the `PYTHONUTF8=1` environment variable. See [PYTHONUTF8](#pythonutf8) for enabling UTF-8 mode, and [Excursus: Setting environment variables](#excursus--setting-environment-variables) for how to modify environment variables.
+
+When UTF-8 mode is enabled:
+
+- locale.getpreferredencoding() returns 'UTF-8' instead of the system encoding. This function is used for the default text encoding in many places, including open(), Popen, Path.read_text(), etc.
+- sys.stdin, sys.stdout, and sys.stderr all use UTF-8 as their text encoding.
+
+You can still use the system encoding via the “mbcs” codec.
+
+Note that adding `PYTHONUTF8=1` to the default environment variables will affect all Python 3.7+ applications on your system. If you have any Python 3.7+ applications which rely on the legacy system encoding, it is recommended to set the environment variable temporarily or use the `-X utf8` command line option.
+
+```Note
+Note Even when UTF-8 mode is disabled, Python uses UTF-8 by default on Windows for: Console I/O including standard I/O and The filesystem encoding.
+```
+
+### Getting Started
+#### Using the Python Interpreter
+##### Invoking the Python Interpreter
+The Python interpreter is usually installed as `/usr/local/bin/python3.9` on those machines where it is available; putting `/usr/local/bin` in your Unix shell’s search path makes it possible to start it by typing the command:
+
+```Python
+python3.9
+```
+
+On Windows machines where you have installed Python from the Microsoft Store, the python3.9 command will be available. If you have the `py.exe` launcher installed, you can use the `py command`. See [Excursus: Setting environment variables](#excursus--setting-environment-variables) for other ways to launch Python.
+
+```Python
+D:\Developer\Python\projects\learning\documentation>py
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+Typing an end-of-file character (Control-D on Unix, `Control-Z on Windows`) at the primary prompt causes the interpreter to exit with a zero exit status. If that doesn’t work, you can exit the interpreter by typing the following command: `quit()`.
+
+```Python
+D:\Developer\Python\projects\learning\documentation>py
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+
+D:\Developer\Python\projects\learning\documentation>
+```
+
+The interpreter operates somewhat like the Unix shell: when called with standard input connected to a tty device, it reads and executes commands interactively; when called with a file name argument or with a file as standard input, it reads and executes a script from that file.
+
+A second way of starting the interpreter is python -c command [arg] ..., which executes the statement(s) in command, analogous to the shell’s -c option. Since Python statements often contain spaces or other characters that are special to the shell, it is usually advised to quote command in its entirety with single quotes.
+
+Some Python modules are also useful as scripts. These can be invoked using python -m module [arg] ..., which executes the source file for module as if you had spelled out its full name on the command line.
+
+When a script file is used, it is sometimes useful to be able to run the script and enter interactive mode afterwards. This can be done by passing -i before the script.
+
+All command line options are described in [Command line and environment](https://docs.python.org/3/using/cmdline.html#using-on-general).
+
+
+##### Argument Passing
+When known to the interpreter, the script name and additional arguments thereafter are turned into a list of strings and assigned to the `argv` variable in the `sys` module. You can access this list by executing `import sys`. The length of the list is at least one; when no script and no arguments are given, `sys.argv[0]` is an empty string. When the script name is given as `-` (meaning standard input), `sys.argv[0]` is set to `-`. When -c command is used, `sys.argv[0]` is set to `-c`. When `-m` module is used, `sys.argv[0]` is set to the full name of the located module. Options found after `-c` command or `-m` module are not consumed by the Python interpreter’s option processing but left in `sys.argv` for the command or module to handle.
+
+Let’s create a test Python script - create a file called hello.py with the following contents
+
+```Python
+#! python
+import sys
+sys.stdout.write("hello from Python %s\n" % (sys.version,))
+```
+
+You should notice the version number of your latest Python installation is printed.
+
+##### Interactive Mode
+When commands are read from a tty, the interpreter is said to be in interactive mode. In this mode it prompts for the next command with the primary prompt, usually three greater-than signs `(>>>)`; for continuation lines it prompts with the secondary prompt, by default three dots `(...)`. The interpreter prints a welcome message stating its version number and a copyright notice before printing the first prompt:
+
+```Python
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+Continuation lines are needed when entering a multi-line construct. As an example, take a look at this if statement:
+
+```Python
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> the_world_is_flat = True
+>>> if the_world_is_flat:
+...     print("Be careful not to fall off!")
+...
+Be careful not to fall off!
+>>>
+```
+
+## An Informal Introduction to Python
+### Comments
+In the following examples, input and output are distinguished by the presence or absence of prompts (`>>>` and `…`): to repeat the example, you must type everything after the prompt, when the prompt appears; lines that do not begin with a prompt are output from the interpreter. Note that a secondary prompt on a line by itself in an example means you must type a blank line; this is used to end a multi-line command.
+
+Many of the examples in this manual, even those entered at the interactive prompt, include comments. Comments in Python start with the hash character, `#`, and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code, but not within a string literal. A hash character within a string literal is just a hash character. Since comments are to clarify code and are not interpreted by Python, they may be omitted when typing in examples.
+
+Some examples:
+
+```Python
+# comments.py
+# this is the first comment
+spam = 1  # and this is the second comment
+          # ... and now a third!
+text = "# This is not a comment because it's inside quotes."
+print(text)
+```
+
+### Variables
+Python supports variables and in order to assign a new value to a variable, the syntax looks a little something like this:
+
+```Python
+# variables.py
+a = 28        #int
+b = 1.5       #float
+c = "Hello!"  #str
+d = True      #bool
+e = None      #NoneType
+```
+
+If I have a line like a equals 28, what that's going to mean is take the value 28 and assign it, store it inside of this variable called `a`. Now, unlike other languages like C or Java which you might be familiar with, where you have to specify the type of every variable you create -- You have to say like, `int a` to mean a is an `integer`. Python doesn't require you to tell you what the types of each of these variables actually are. So we can just say a equals 28 and Python knows that because this number is an int, that it's going to represent the variable `a` as an `int`, that it knows, it's able to infer, what the types of any these values happen to be.
+
+So all the values do indeed have types. You just don't explicitly need to state them. So, for example, in the variable.py file above, the number 28 is a type int, it's an integer. A number like 1.5 has a decimal in it, it's a floating point number. So that, in Python, is what we might call a float type. Any type of text, something like the word "hello" wrapped in either double quotation marks or single quotation marks -- Python supports both -- is what we would call the str type, short for string. We also have a type for Boolean values, things that can be either true or false. In Python, those are represented using a capital T, true, and a capital F, false. Those are of the type bool. And also, we have a special type in Python called the none type, which only has one possible value, this capital N, none. And none as a value we'll use whenever we want to represent the lack of a value somewhere. So if we have a function that is not returning anything, it is really returning none, effectively.
+
+### Numbers
+The interpreter acts as a simple calculator: you can type an expression at it and it will write the value. Expression syntax is straightforward: the operators +, -, * and / work just like in most other languages (for example, Pascal or C); parentheses (()) can be used for grouping. For example:
+
+```Python
+# numbers.py
+addition = (2 + 2)
+multiplication = (5 * 6)
+subtraction = (50 - multiplication)
+division = (subtraction / 4)
+division2 = (8 / 5)             # division always returns a floating point number
+division3 = (17 // 3)           # floor division discards the fractional part
+remainder = (17 % 3)            # the % operator returns the remainder of the division
+squared = (5 ** 2)              # 5 squared
+powerof = (2 ** 7)              # 2 to the power of 7
+floatpoint = (4 * 3.75 - 1)     # Operators with mixed type operands convert the integer operand to floating point
+
+print(f"Addition of (2 + 2)={addition}")
+print(f"Multiplication of (5 * 6)={multiplication}")
+print(f"Subtraction of (50 - 5 * 6)={subtraction}")
+print(f"Division always returns a floating point number: (8 / 5)={division2}")
+print(f"Floor division discards the fractional part: (17 // 3)={division3}")
+print(f"The operator % returns the remainder of the division: (17 % 3)={remainder}")
+print(f"It is possible to use the ** operator to calculate powers: 5 squared(5 ** 2) ={squared}")
+print(f"To calculate 2 to the power of 7: (2 ** 7)={powerof}")
+print(f"Operators with mixed type operands convert the integer operand to floating point: (4 * 3.75 - 1)={floatpoint}")
+```
+
+The integer numbers (e.g. 2, 4, 20) have type int, the ones with a fractional part (e.g. 5.0, 1.6) have type float. Division (`/`) always returns a float. To do floor division and get an integer result (discarding any fractional result) you can use the (`//`) operator; to calculate the remainder you can use `%`. It is possible to use the `**` operator to calculate powers. There is also full support for floating point; operators with mixed type operands convert the integer operand to floating point.
+
+In interactive mode, the last printed expression is assigned to the variable `_`. This means that when you are using Python as a desk calculator, it is somewhat easier to continue calculations, for example:
+
+```Python
+>>> tax = 12.5 / 100
+>>> price = 100.50
+>>> price * tax
+12.5625
+>>> price + _
+113.0625
+>>> round(_, 2)
+113.06
+```
+
+This variable should be treated as read-only by the user. Don’t explicitly assign a value to it — you would create an independent local variable with the same name masking the built-in variable with its magic behavior.
+
+In addition to int and float, Python supports other types of numbers, such as Decimal and Fraction. Python also has built-in support for complex numbers, and uses the j or J suffix to indicate the imaginary part (e.g. 3+5j).
