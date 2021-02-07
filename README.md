@@ -44,7 +44,7 @@ In the next chapter, the mechanics of using the interpreter are explained. This 
 
 The rest of the tutorial introduces various features of the Python language and system through examples, beginning with simple expressions, statements and data types, through functions and modules, and finally touching upon advanced concepts like exceptions and user-defined classes.
 
-## Using Python on Windows
+### Using Python on Windows
 This document aims to give an overview of Windows-specific behaviour you should know about when using Python on Microsoft Windows.
 
 Unlike most Unix systems and services, Windows does not include a system supported installation of Python. To make Python available, the CPython team has compiled Windows installers (MSI packages) with every release for many years. These installers are primarily intended to add a per-user installation of Python, with the core interpreter and library being used by a single user. The installer is also able to install for all users of a single machine, and a separate ZIP file is available for application-local distributions.
@@ -81,6 +81,10 @@ The embeddable package is a minimal package of Python suitable for embedding int
 - [Variables](#variables)
 - [Numbers](#numbers)
 - [Strings](#strings)
+- [Lists](#lists)
+
+### Fist Steps Towards Programming
+- [Fibonacci Series](#fibonacci-series)
 
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
@@ -113,7 +117,7 @@ This allows the open() function, the os module and most other path functionality
 
 Changed in version 3.6: Support for long paths was enabled in Python.
 
-### The Microsoft Store Package
+#### The Microsoft Store Package
 The Microsoft Store package is an easily installable Python interpreter that is intended mainly for interactive use, for example, by students.
 
 To install the package, ensure you have the latest Windows 10 updates and search the Microsoft Store app for “Python 3.9”. Ensure that the app you select is published by the Python Software Foundation, and install it.
@@ -133,7 +137,7 @@ To remove Python, open Settings and use Apps and Features, or else find Python i
 - [Known Issues]
 Because of restrictions on Microsoft Store apps, Python scripts may not have full write access to shared locations such as TEMP and the registry. Instead, it will write to a private copy. If your scripts must modify the shared locations, you will need to install the full installer.
 
-### Alternative Bundles
+#### Alternative Bundles
 Besides the standard CPython distribution, there are modified packages including additional functionality. The following is a list of popular versions and their key features:
 
 - [ActivePython](https://www.activestate.com/activepython/) : Installer with multi-platform compatibility, documentation, PyWin32
@@ -143,7 +147,7 @@ Besides the standard CPython distribution, there are modified packages including
 
 Note that these packages may not include the latest versions of Python or other libraries, and are not maintained or supported by the core Python team.
 
-### Configuring Python
+#### Configuring Python
 To run Python conveniently from a command prompt, you might consider changing some default environment variables in Windows. While the installer provides an option to configure the PATH and PATHEXT variables for you, this is only reliable for a single, system-wide installation. If you regularly use multiple versions of Python, consider using the [Python Launcher for Windows](https://docs.python.org/3/using/windows.html#launcher).
 
 #### Excursus: Setting environment variables
@@ -268,8 +272,8 @@ Be careful not to fall off!
 >>>
 ```
 
-## An Informal Introduction to Python
-### Comments
+### An Informal Introduction to Python
+#### Comments
 In the following examples, input and output are distinguished by the presence or absence of prompts (`>>>` and `…`): to repeat the example, you must type everything after the prompt, when the prompt appears; lines that do not begin with a prompt are output from the interpreter. Note that a secondary prompt on a line by itself in an example means you must type a blank line; this is used to end a multi-line command.
 
 Many of the examples in this manual, even those entered at the interactive prompt, include comments. Comments in Python start with the hash character, `#`, and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code, but not within a string literal. A hash character within a string literal is just a hash character. Since comments are to clarify code and are not interpreted by Python, they may be omitted when typing in examples.
@@ -285,7 +289,7 @@ text = "# This is not a comment because it's inside quotes."
 print(text)
 ```
 
-### Variables
+#### Variables
 Python supports variables and in order to assign a new value to a variable, the syntax looks a little something like this:
 
 ```Python
@@ -301,7 +305,7 @@ If I have a line like a equals 28, what that's going to mean is take the value 2
 
 So all the values do indeed have types. You just don't explicitly need to state them. So, for example, in the variable.py file above, the number 28 is a type int, it's an integer. A number like 1.5 has a decimal in it, it's a floating point number. So that, in Python, is what we might call a float type. Any type of text, something like the word "hello" wrapped in either double quotation marks or single quotation marks -- Python supports both -- is what we would call the str type, short for string. We also have a type for Boolean values, things that can be either true or false. In Python, those are represented using a capital T, true, and a capital F, false. Those are of the type bool. And also, we have a special type in Python called the none type, which only has one possible value, this capital N, none. And none as a value we'll use whenever we want to represent the lack of a value somewhere. So if we have a function that is not returning anything, it is really returning none, effectively.
 
-### Numbers
+#### Numbers
 The interpreter acts as a simple calculator: you can type an expression at it and it will write the value. Expression syntax is straightforward: the operators +, -, * and / work just like in most other languages (for example, Pascal or C); parentheses (()) can be used for grouping. For example:
 
 ```Python
@@ -347,7 +351,7 @@ This variable should be treated as read-only by the user. Don’t explicitly ass
 
 In addition to int and float, Python supports other types of numbers, such as Decimal and Fraction. Python also has built-in support for complex numbers, and uses the j or J suffix to indicate the imaginary part (e.g. 3+5j).
 
-### Strings
+#### Strings
 Besides numbers, Python can also manipulate strings, which can be expressed in several ways. They can be enclosed in single quotes ('...') or double quotes ("...") with the same result 2. \ can be used to escape quotes:
 
 ```Python
@@ -573,4 +577,136 @@ The built-in function len() returns the length of a string:
 >>> s = 'supercalifragilisticexpialidocious'
 >>> len(s)
 34
+```
+
+#### Lists
+Python knows a number of compound data types, used to group together other values. The most versatile is the list, which can be written as a list of comma-separated values (items) between square brackets. Lists might contain items of different types, but usually the items all have the same type.
+
+```Python
+# lists.py
+# Lists can be written as a list of comma-separated values (items) between square brackets
+squares = [1, 4, 9, 16, 25]
+print(f"squares={squares}")
+```
+
+Like strings (and all other built-in sequence types), lists can be indexed and sliced:
+
+```Python
+# lists.py
+# Lists can be indexed and slices like strings
+print(f"squares[0]={squares[0]}")
+print(f"squares[-1]={squares[-1]}")
+print(f"squares[-3:]={squares[-3:]}")
+```
+
+All slice operations return a new list containing the requested elements. This means that the following slice returns a shallow copy of the list:
+
+```Python
+# lists.py
+# All slice operations return a new list containing the requested elements
+print(f"squares[:]={squares[:]}")
+```
+
+Lists also support operations like concatenation:
+
+```Python
+# lists.py
+# Lists also support operations like concatenation
+squares2 = squares + [36, 49, 64, 81, 100]
+print(f"squares2 = squares + [36, 49, 64, 81, 100] = {squares2}")
+```
+
+Unlike strings, which are immutable, lists are a mutable type, i.e. it is possible to change their content:
+
+```Python
+# lists.py
+# Lists are a mutable type, i.e. it is possible to change their content
+cubes = [1, 8, 27, 65, 125] #something wrong here, the cube of 4 (4 ** 3) is 64, not 65!
+cubes[3] = 64
+print(f"cubes = {cubes}")
+```
+
+You can also add new items at the end of the list, by using the append() method (we will see more about methods later):
+
+```Python
+# lists.py
+# You can also add new items at the end of the list, by using the append() method
+cubes.append(216) #add the cube of 6
+cubes.append(7 ** 3) # and the cube of 7
+print(f"cubes = {cubes}")
+```
+
+Assignment to slices is also possible, and this can even change the size of the list or clear it entirely:
+
+```Python
+# lists.py
+# Assignment to slices is also possible, and this can even change the size of the list or clear it entirely
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+print(f"letters = {letters}")
+
+letters[2:5] = ['C', 'D', 'E'] #replacing some values
+print(f"letters = {letters}")
+
+letters[2:5] = [] #removing values
+print(f"letters = {letters}")
+
+letters[:] = [] # clear the list by replacing all the elements with an empty list
+print(f"letters = {letters}")
+```
+
+The built-in function len() also applies to lists:
+
+```Python
+# lists.py
+# The built-in function len() also applies to lists
+letters = ['a', 'b', 'c', 'd']
+print(f"len(letters) = {len(letters)}")
+```
+
+It is possible to nest lists (create lists containing other lists), for example:
+
+```Python
+# lists.py
+# It is possible to nest lists (create lists containing other lists)
+a = ['a', 'b', 'c']
+n = [1, 2 ,3]
+x = [a, n]
+print(f"x = {x}")
+print(f"x[0] = {x[0]}")
+print(f"x[0][1] = {x[0][1]}")
+```
+
+### Fist Steps Towards Programming
+#### Fibonacci Series
+Of course, we can use Python for more complicated tasks than adding two and two together. For instance, we can write an initial sub-sequence of the Fibonacci series as follows:
+
+```Python
+# fibonacci.py
+a, b = 0, 1
+while a < 10:
+    print(a)
+    a, b = b, a+b
+```
+
+This example introduces several new features.
+
+- The first line contains a multiple assignment: the variables a and b simultaneously get the new values 0 and 1. On the last line this is used again, demonstrating that the expressions on the right-hand side are all evaluated first before any of the assignments take place. The right-hand side expressions are evaluated from the left to the right.
+- The while loop executes as long as the condition (here: a < 10) remains true. In Python, like in C, any non-zero integer value is true; zero is false. The condition may also be a string or list value, in fact any sequence; anything with a non-zero length is true, empty sequences are false. The test used in the example is a simple comparison. The standard comparison operators are written the same as in C: < (less than), > (greater than), == (equal to), <= (less than or equal to), >= (greater than or equal to) and != (not equal to).
+- The body of the loop is indented: indentation is Python’s way of grouping statements. At the interactive prompt, you have to type a tab or space(s) for each indented line. In practice you will prepare more complicated input for Python with a text editor; all decent text editors have an auto-indent facility. When a compound statement is entered interactively, it must be followed by a blank line to indicate completion (since the parser cannot guess when you have typed the last line). Note that each line within a basic block must be indented by the same amount.
+- The print() function writes the value of the argument(s) it is given. It differs from just writing the expression you want to write (as we did earlier in the calculator examples) in the way it handles multiple arguments, floating point quantities, and strings. Strings are printed without quotes, and a space is inserted between items, so you can format things nicely, like this:
+
+```Python
+# fibonacci.py
+i = 256*256
+print('The value of i is', i)
+```
+
+The keyword argument end can be used to avoid the newline after the output, or end the output with a different string:
+
+```Python
+# fibonacci.py
+a, b = 0, 1
+while a < 10:
+    print(a, end=',')
+    a, b = b, a+b
 ```
