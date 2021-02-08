@@ -86,6 +86,10 @@ The embeddable package is a minimal package of Python suitable for embedding int
 ### Fist Steps Towards Programming
 - [Fibonacci Series](#fibonacci-series)
 
+### More Control Flow Tools
+- [If Statements](#if_statements)
+- [For Statements](#for_statements)
+
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
 
@@ -709,4 +713,53 @@ a, b = 0, 1
 while a < 10:
     print(a, end=',')
     a, b = b, a+b
+```
+
+### More Control Flow Tools
+Besides the `while` statement just introduced, Python uses the usual flow control statements known from other languages, with some twists.
+
+#### If Statements
+Perhaps the most well-known statement type is the `if` statement. For example:
+
+```Python
+# if.py
+x = int(input("Please enter a integer: "))
+if x < 0:
+    x = 0
+    print("Negative changed to zero")
+elif x == 0:
+    print("Zero")
+elif x == 1:
+    print("Single")
+else:
+    print("More")
+```
+
+There can be zero or more `elif` parts, and the else part is optional. The keyword `elif` is short for `else if`, and is useful to avoid excessive indentation. An `if … elif … elif …` sequence is a substitute for the `switch` or `case statements` found in other languages.
+
+#### For Statements
+The `for` statement in Python differs a bit from what you may be used to in C or Pascal. Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example (no pun intended):
+
+```Python
+# for.py
+# Measure some string:
+words = ['cat', 'window', 'defenestrate']
+for w in words:
+    print(w, len(w))
+```
+
+Code that modifies a collection while iterating over that same collection can be tricky to get right. Instead, it is usually more straight-forward to loop over a copy of the collection or to create a new collection:
+
+```Python
+# for.py
+# Strategy: Iterate over a copy
+for user, status in users.copy.items():
+    if status == 'inactive':
+        del users[user]
+
+# Strategy: Create a new collection
+active_users = {}
+for user, status in users.items():
+    if status == 'active':
+        active_users[user] = status
 ```
