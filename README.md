@@ -87,8 +87,9 @@ The embeddable package is a minimal package of Python suitable for embedding int
 - [Fibonacci Series](#fibonacci-series)
 
 ### More Control Flow Tools
-- [If Statements](#if_statements)
-- [For Statements](#for_statements)
+- [If Statements](#if-statements)
+- [For Statements](#for-statements)
+- [The range function](#the-range-function)
 
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
@@ -762,4 +763,64 @@ active_users = {}
 for user, status in users.items():
     if status == 'active':
         active_users[user] = status
+```
+
+#### The range Function
+If you do need to iterate over a sequence of numbers, the built-in function range() comes in handy. It generates arithmetic progressions:
+
+```Python
+# range.py
+for i in range(5):
+    print(i)
+```
+
+The given end point is never part of the generated sequence; range(10) generates 10 values, the legal indices for items of a sequence of length 10. It is possible to let the range start at another number, or to specify a different increment (even negative; sometimes this is called the ‘step’):
+
+```Python
+# range.py
+print("range(5, 10)")
+for i in range(5, 10):
+    print(i)
+
+print("range(0, 10, 3)")
+for i in range(0, 10, 3):
+    print(i)
+
+print("range(-10, -100, -30)")
+for i in range(-10, -100, -30):
+    print(i)
+```
+
+To iterate over the indices of a sequence, you can combine range() and len() as follows:
+
+```Python
+# range.py
+a = ['Mary', 'had', 'a', 'little', 'lamb']
+for i in range(len(a)):
+      print(i, a[i])
+```
+
+In most such cases, however, it is convenient to use the enumerate() function, see Looping Techniques.
+
+A strange thing happens if you just print a range:
+
+```Python
+# range.py
+print(range(10))
+```
+
+In many ways the object returned by `range()` behaves as if it is a list, but in fact it isn’t. It is an object which returns the successive items of the desired sequence when you iterate over it, but it doesn’t really make the list, thus saving space.
+
+We say such an object is `iterable`, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted. We have seen that the for statement is such a construct, while an example of a function that takes an `iterable` is sum():
+
+```Python
+# range.py
+sum(range(4)) # 0 + 1 + 2 + 3
+```
+
+Later we will see more functions that return `iterables` and take `iterables` as arguments. Lastly, maybe you are curious about how to get a list from a range. Here is the solution:
+
+```Python
+# range.py
+sum(range(4)) # 0 + 1 + 2 + 3
 ```
