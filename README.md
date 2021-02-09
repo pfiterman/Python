@@ -90,7 +90,6 @@ The embeddable package is a minimal package of Python suitable for embedding int
 - [If Statements](#if-statements)
 - [For Statements](#for-statements)
 - [The range function](#the-range-function)
-- [Break and Continue Statements, and else Clauses on Loops](#break-and-continue-statements--and-else-clauses-on-loops)
 
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
@@ -824,36 +823,4 @@ Later we will see more functions that return `iterables` and take `iterables` as
 ```Python
 # range.py
 sum(range(4)) # 0 + 1 + 2 + 3
-```
-
-#### Break and Continue Statements, and else Clauses on Loops
-The `break` statement, like in C, breaks out of the innermost enclosing `for` or `while` loop.
-
-Loop statements may have an `else` clause; it is executed when the loop terminates through exhaustion of the iterable (with `for`) or when the condition becomes false (with `while`), but not when the loop is terminated by a `break` statement. This is exemplified by the following loop, which searches for prime numbers:
-
-```Python
-# break.py
-for n in range(2, 10):
-    for x in range(2, n):
-        if n % x == 0:
-            print(n, 'equals', x, '*', n//x)
-            break
-    else:
-        # Loop fell through without finding a factor
-        print(n, 'is a prime number')
-```
-
-(Yes, this is the correct code. Look closely: the `else` clause belongs to the `for` loop, not the `if` statement.)
-
-When used with a loop, the `else` clause has more in common with the `else` clause of a `try` statement than it does with that of `if` statements: a `try` statement’s `else` clause runs when no exception occurs, and a loop’s `else` clause runs when no `break` occurs. For more on the try statement and exceptions, see Handling Exceptions.
-
-The continue statement, also borrowed from C, continues with the next iteration of the loop:
-
-```Python
-# continue.py
-for num in range(2, 10):
-    if num % 2 == 0:
-        print("Found an even number", num)
-        continue
-    print("Found an odd number", num)
 ```
