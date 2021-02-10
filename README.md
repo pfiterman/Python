@@ -91,6 +91,9 @@ The embeddable package is a minimal package of Python suitable for embedding int
 - [For Statements](#for-statements)
 - [The range function](#the-range-function)
 - [Break and Continue Statements, and else Clauses on Loops](#break-and-continue-statements--and-else-clauses-on-loops)
+- [Pass Statements](#pass-statements)
+- [Defining Functions](#defining-functions)
+- [More on Defining Functions](#more-on-defining-functions)
 
 #### Installation Steps
 Four Python 3.9 installers are available for download - two each for the 32-bit and 64-bit versions of the interpreter. The web installer is a small initial download, and it will automatically download the required components as necessary. The offline installer includes the components necessary for a default installation and only requires an internet connection for optional features. See Installing Without Downloading for other ways to avoid downloading during installation.
@@ -856,4 +859,163 @@ for num in range(2, 10):
         print("Found an even number", num)
         continue
     print("Found an odd number", num)
+```
+
+#### Pass Statements
+The `pass` statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:
+
+```Python
+# pass.py
+while True:
+    pass
+```
+
+This is commonly used for creating minimal classes:
+
+```Python
+# pass.py
+while True:
+    pass
+```
+
+Another place `pass` can be used is as a place-holder for a function or conditional body when you are working on new code, allowing you to keep thinking at a more abstract level. The pass is silently ignored:
+
+```Python
+# pass.py
+def initlog(*args):
+    pass #Remember to implement this!
+```
+
+#### Defining Functions
+We can create a function that writes the Fibonacci series to an arbitrary boundary:
+
+```Python
+# function.py
+def fib(n): # write fibonacci series up to n
+    """Print a Fibonacci series up to n."""
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b
+    print()
+
+# Now call the function we just defined:
+fib(2000)
+```
+
+The keyword `def` introduces a function definition. It must be followed by the function name and the parenthesized list of formal parameters. The statements that form the body of the function start at the next line, and must be indented.
+
+The first statement of the function body can optionally be a string literal; this string literal is the function’s documentation string, or docstring. (More about docstrings can be found in the section Documentation Strings.) There are tools which use docstrings to automatically produce online or printed documentation, or to let the user interactively browse through code; it’s good practice to include docstrings in code that you write, so make a habit of it.
+
+The execution of a function introduces a new symbol table used for the local variables of the function. More precisely, all variable assignments in a function store the value in the local symbol table; whereas variable references first look in the local symbol table, then in the local symbol tables of enclosing functions, then in the global symbol table, and finally in the table of built-in names. Thus, global variables and variables of enclosing functions cannot be directly assigned a value within a function (unless, for global variables, named in a global statement, or, for variables of enclosing functions, named in a nonlocal statement), although they may be referenced.
+
+The actual parameters (arguments) to a function call are introduced in the local symbol table of the called function when it is called; thus, arguments are passed using call by value (where the value is always an object reference, not the value of the object). 1 When a function calls another function, a new local symbol table is created for that call.
+
+A function definition associates the function name with the function object in the current symbol table. The interpreter recognizes the object pointed to by that name as a user-defined function. Other names can also point to that same function object and can also be used to access the function:
+
+```Python
+# function.py
+f = fib
+f(100)
+```
+
+Coming from other languages, you might object that `fib` is not a function but a procedure since it doesn’t return a value. In fact, even functions without a `return` statement do return a value, albeit a rather boring one. This value is called `None` (it’s a built-in name). Writing the value `None` is normally suppressed by the interpreter if it would be the only value written. You can see it if you really want to using `print()`:
+
+```Python
+# function.py
+fib(0)
+print(fib(0))
+```
+
+It is simple to write a function that returns a list of the numbers of the Fibonacci series, instead of printing it:
+
+```Python
+# function.py
+def fib2(n): # return Fibonacci series up to n
+    """Return a list containing the Fibonacci series up to n."""
+    result = []
+    a, b = 0, 1
+    while a < n:
+        result.append(a) # see below
+        a, b = b, a+b
+    return result
+
+f100 = fib2(100) # call it
+print(f100)      # write the result
+```
+
+This example, as usual, demonstrates some new Python features:
+- The `return` statement returns with a value from a function. `return` without an expression argument returns `None`. Falling off the end of a function also returns `None`.
+- The statement `result.append(a)` calls a method of the list object `result`. A method is a function that ‘belongs’ to an object and is named `obj.methodname`, where obj is some object (this may be an expression), and methodname is the name of a method that is defined by the object’s type. Different types define different methods. Methods of different types may have the same name without causing ambiguity. (It is possible to define your own object types and methods, using `classes`) The method `append()` shown in the example is defined for list objects; it adds a new element at the end of the list. In this example it is equivalent to `result = result + [a]`, but more efficient.
+
+#### More on Defining Functions
+It is also possible to define functions with a variable number of arguments. There are three forms, which can be combined.
+
+##### Default Argument Values
+The most useful form is to specify a default value for one or more arguments. This creates a function that can be called with fewer arguments than it is defined to allow. For example:
+
+```Python
+# functionWithVariableNumberOfArguments.py
+def ask_ok(prompt, retries=4, reminder='Please try again!'):
+    while True:
+        ok = input(prompt)
+        if ok in ('y', 'ye', 'yes'):
+            return True
+        if ok in ('n', 'no', 'nop', 'nope'):
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise ValueError('invalid user response')
+        print(reminder)
+```
+
+This function can be called in several ways:
+- giving only the mandatory argument: ask_ok('Do you really want to quit?')
+- giving one of the optional arguments: ask_ok('OK to overwrite the file?', 2)
+- or even giving all arguments: ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')
+
+This example also introduces the `in` keyword. This tests whether or not a sequence contains a certain value.
+
+The default values are evaluated at the point of function definition in the defining scope, so that
+
+```Python
+# functionWithVariableNumberOfArguments.py
+i = 5
+def f(arg=i):
+    print(arg)
+
+i = 6
+f()
+```
+will print 5.
+
+`Important warning`: The default value is evaluated only once. This makes a difference when the default is a mutable object such as a list, dictionary, or instances of most classes. For example, the following function accumulates the arguments passed to it on subsequent calls:
+
+```Python
+# functionWithVariableNumberOfArguments.py
+def f(a, L=[]):
+    L.append(a)
+    return L
+
+print(f(1))
+print(f(2))
+print(f(3))
+```
+This will print
+
+```Python
+[1]
+[1, 2]
+[1, 2, 3]
+```
+
+If you don’t want the default to be shared between subsequent calls, you can write the function like this instead:
+
+```Python
+# functionWithVariableNumberOfArguments.py
+def f(a, L=None):
+    if L is None:
+        L = []
+    L.append(a)
+    return L
 ```
