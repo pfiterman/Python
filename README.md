@@ -7,6 +7,8 @@ Hi there, welcome to my personal repository about Python. Python is an easy to l
 ## Folder Structure
 
 - 📂 [learning](#learning)
+  - 📁 [azure](./learning/azure/)
+    - 📁 [cognitive-services-speech-sdk](./learning/azure/cognitive-services-speech-sdk/)
   - 📁 [codeacademy](./learning/codeacademy/)
   - 📁 [documentation](./learning/documentation/)
   - 📁 [harvard](./learning/harvard/)
