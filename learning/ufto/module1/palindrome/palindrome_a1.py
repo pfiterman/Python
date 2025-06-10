@@ -1,12 +1,12 @@
-def is_palindrome_v4(s):
+def is_palindrome_a1(s):
     """ (str) -> bool
     Return True if and only if s us a palindrome.
 
-    >>> is_palindrome_v4('noon')
+    >>> is_palindrome_a1('noon')
     True
-    >>> is_palindrome_v4('racecar')
+    >>> is_palindrome_a1('racecar')
     True
-    >>> is_palindrome_v4('dented')
+    >>> is_palindrome_a1('dented')
     False
     """
     for i in range(len(s) // 2):
