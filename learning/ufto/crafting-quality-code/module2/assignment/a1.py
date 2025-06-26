@@ -1,3 +1,5 @@
+import math
+
 def num_buses(n):
     """ (int) -> int
 
@@ -6,9 +8,22 @@ def num_buses(n):
     Return the minimum number of buses required to transport n people.
     Each bus can hold 50 people.
 
-    >>> num_buses(75)
+    >>> num_buses(0)
+    0
+    >>> num_buses(1)
+    1
+    >>> num_buses(30)
+    1
+    >>> num_buses(50)
+    1
+    >>> num_buses(51)
     2
+    >>> num_buses(100)
+    2
+    >>> num_buses(101)
+    3
     """
+    return math.ceil(n/50) 
 
 
 def stock_price_summary(price_changes):
@@ -18,9 +33,23 @@ def stock_price_summary(price_changes):
     tuple where the first item is the sum of the gains in price_changes and
     the second is the sum of the losses in price_changes.
 
+    >>> stock_price_summary([])
+    (0,0)
+    >>> stock_price_summary([0.01, 0.03, 0.02, 0.14, 0, 0, 0.10, 0.01])
+    (0.31, 0)
+    >>> stock_price_summary([-0.01, -0.03, -0.02, -0.14, -0, -0, -0.10, -0.01])
+    (0, -0.31)
     >>> stock_price_summary([0.01, 0.03, -0.02, -0.14, 0, 0, 0.10, -0.01])
     (0.14, -0.17)
     """
+    total_gains = 0
+    total_loss = 0
+    for price in price_changes:
+        if price>=0:
+            total_gains = total_gains + price
+        else:
+            total_loss = total_loss + price
+    return (round(total_gains,2), round(total_loss,2))
 
 
 def swap_k(L, k):
@@ -34,8 +63,12 @@ def swap_k(L, k):
     >>> swap_k(nums, 2)
     >>> nums
     [5, 6, 3, 4, 1, 2]
-    """
-
+    """    
+    first_k_items = []
+    if k != 0:
+        first_k_items = L[:k]
+        L[:k]  = L[-k:]
+        L[-k:] = first_k_items
 
 if __name__ == '__main__':
     import doctest
