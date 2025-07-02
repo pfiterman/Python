@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0332)https://d3c33hcgiwev3.cloudfront.net/_380a7150ad2742acae88b12383e465ca_palindrome_algorithm1.html?Expires=1751500800&Signature=ak45p9oGopeURmA2v0VXrUbcmScEQ5tdrD8~zSrNm2EqgSC9iAtmb~2mxT-zqbk5M7-zb6TIlwFTieGt94QsiEwWtr8lEwwMx~SyBku~93dkylbLgEEh1UnQEIFZS~lo3OAqFhGWiG6tJKhMYjHQ02-thXUkZddV0Vf7ASfNLQc_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">	
+				
+		<title>Palindrome: Algorithm 1</title>					
+	</head>	
+	
+	<body>
+		<div class="page_header">
+			<!-- For local testing -->
+			<!--a href="http://web.cs.toronto.edu/"><img src="bluescreen.jpg" alt="University of Toronto - Computer Science - Image" ></a-->
+			
+			<!-- For web version -->
+			<a href="http://web.cs.toronto.edu/"><img src="./Palindrome_ Algorithm 1_files/_effbbd4e792a0bbfa32f5b33444045d6_bluescreen.jpg" alt="University of Toronto - Computer Science - Image"></a>			
+			<hr>
+		</div>
+		
+		<h1>Palindrome: Algorithm 1</h1> 
+		<h2>
+			Overview
+		</h2>
+			<p>		
+				To determine whether a string is a palindrome, the first algorithm we explored was:
+			</p>
+			<ol>
+				<li>Reverse the string.</li>
+				<li>Compare the reversed string to the original string.</li>
+			</ol>
+			<p>
+				For example, the reverse of the string <code>"noon"</code> is <code>"noon"</code>. Since the reversed string is the same as the original string, <code>"noon"</code> is a palindrome.
+			</p>	
+			<p>
+				For the string <code>"dented"</code>, the reverse of the string <code>"dented"</code> is <code>"detned"</code>. Since the reversed string is <em>not</em> the same as the original string, <code>"dented"</code> is <em>not</em> a palindrome.
+			</p>	
+		
+			<h2>
+				Code
+			</h2>
+<pre>def reverse(s):
+    """ (str) -&gt; str
+
+    Return s reversed.
+    
+    &gt;&gt;&gt; reverse('hello')
+    'olleh'
+    """
+
+    s_reversed = ''
+    for ch in s:
+        s_reversed = ch + s_reversed
+    return s_reversed
+
+
+def is_palindrome_v1(s):
+    """ (str) -&gt; bool
+
+    Return True if and only if s is a palindrome.
+
+    &gt;&gt;&gt; is_palindrome_v1('noon')
+    True
+    &gt;&gt;&gt; is_palindrome_v1('radar')
+    True
+    &gt;&gt;&gt; is_palindrome_v1('kayaks')
+    False
+    """
+
+    s_reversed = reverse(s)
+    return s == s_reversed
+</pre>
+ 		
+	<hr>
+		<center>
+    		Jennifer Campbell • Paul Gries<br>
+     		University of Toronto
+		</center>
+	<hr> 
+
+</body></html>

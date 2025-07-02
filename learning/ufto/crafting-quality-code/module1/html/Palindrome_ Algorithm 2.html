@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0332)https://d3c33hcgiwev3.cloudfront.net/_380a7150ad2742acae88b12383e465ca_palindrome_algorithm2.html?Expires=1751500800&Signature=Be0oTO5YQx7OhaFYjSgYc7e66go8w01sFNEBYBAX82fO~Uucj4KjXCJtDFBuK8ZV4NzMDHErFpdc9Xj7jEqEkgL56Gt1fomCOmiEIe3uN6ya1M0RVyCdSjUINwde4eH-5c3edxG6Z1PO4sswUWs3dCJhTt7TTQ3aWo4wKoQ99Dw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">	
+		
+		<link href="./Palindrome_ Algorithm 2_files/styles.css" rel="stylesheet" type="text/css">
+		<link href="./Palindrome_ Algorithm 2_files/styles(1).css" rel="stylesheet" type="text/css">
+		
+		<title>Palindrome: Algorithm 2</title>					
+	</head>	
+	
+	<body>
+		<div class="page_header">
+			<!-- For local testing -->
+			<!--a href="http://web.cs.toronto.edu/"><img src="bluescreen.jpg" alt="University of Toronto - Computer Science - Image" ></a-->
+			
+			<!-- For web version -->
+			<a href="./Palindrome_ Algorithm 2_files/saved_resource"><img src="./Palindrome_ Algorithm 2_files/saved_resource"><img src="./Palindrome_ Algorithm 2_files/_effbbd4e792a0bbfa32f5b33444045d6_bluescreen.jpg" alt="University of Toronto - Computer Science - Image"></a>			
+			<hr>
+		</div>
+		
+		<h1>Palindrome: Algorithm 2</h1> 
+		<h2>
+			Overview
+		</h2>
+			<p>		
+				To determine whether a string is a palindrome, the second algorithm we explored was:
+			</p>
+			<ol>
+				<li>Split the string into two halves.</li>
+				<li>Reverse the second half.</li>
+				<li>Compare the first half to the reversed second half.</li>
+			</ol>
+			<p>
+				For example, the first half of the string <code>"noon"</code> is <code>"no"</code> and the second half is <code>"on"</code>. The reverse of the second half is <code>"no"</code>.
+				Since the first half is equal to the reverse of the second half, <code>"noon"</code> is a palindrome.
+			</p>	
+			
+			<p>
+				For a string with an odd length, let's consider
+				<code>"racecar"</code>. When splitting the string
+				into two halves, we omit the middle character,
+				<code>"e"</code>. The first half of the string is
+				<code>"rac"</code> and the second half of the
+				string is <code>"car"</code>. The reverse of the
+				second half is <code>"rac"</code>. Since the first
+				half is equal to the reverse of the second half,
+				<code>"racecar"</code> is a palindrome.
+			</p>	
+			<p>
+				Finally, for a string that is not a palindrome, let's consider
+				<code>"dented"</code>. The first half of the string is
+				<code>"den"</code> and the second half of the
+				string is <code>"ted"</code>. The reverse of the
+				second half is <code>"det"</code>. Since the first
+				half is <em>not</em> equal to the reverse of the second half,
+				<code>"dented"</code> is <em>not</em> a palindrome.
+			</p>
+		<h2>
+			Code
+		</h2>
+<pre>def is_palindrome_v2(s):
+    """ (str) -&gt; bool
+
+    Return True if and only if s is a palindrome.
+
+    &gt;&gt;&gt; is_palindrome_v2('noon')
+    True
+    &gt;&gt;&gt; is_palindrome_v2('racecar')
+    True
+    &gt;&gt;&gt; is_palindrome_v2('dented')
+    False
+    """
+
+    # The number of chars in s.
+    n = len(s)
+
+    # Compare the first half of s to the reverse of the second half.
+    # Omit the middle character of an odd-length string.
+    return s[:n // 2] == reverse(s[n - n // 2:])
+
+def reverse(s):
+    """ (str) -&gt; str
+
+    Return a reversed version of s.
+
+    &gt;&gt;&gt; reverse('hello')
+    'olleh'
+    &gt;&gt;&gt; reverse('a')
+    'a'
+    """
+
+    rev = ''
+
+    # For each character in s, add that char to the beginning of rev.
+    for ch in s:
+        rev = ch + rev
+
+    return rev
+</pre>
+    		
+	<hr>
+		<center>
+    		Jennifer Campbell • Paul Gries<br>
+     		University of Toronto
+		</center>
+	<hr> 
+
+</body></html>
