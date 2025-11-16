@@ -13,7 +13,12 @@ Hi there, welcome to my personal repository about Python. Python is an easy to l
   - 📁 [documentation](./learning/documentation/)
   - 📁 [harvard](./learning/harvard/)
     - 📁 [cs50-web-programming-with-python-and-javascript](./learning/harvard/cs50-web-programming-with-python-and-javascript)
+  - 📁 [meta](./learning/meta/)
+    - 📁 [programming-in-python](./learning//meta/programming-in-python/)
   - 📁 [roboticview](./learning/roboticview/)
+  - 📁 [ufto](./learning//ufto/)
+    - 📁 [crafting-quality-code](./learning/ufto/crafting-quality-code/)
+    - 📁 [learn-to-program-fundamentals](./learning/ufto/learn-to-program-fundamentals/)
 - 📂 [projects](#projects)
 
 ## About Folder Structure
