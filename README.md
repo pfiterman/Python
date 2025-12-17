@@ -6,6 +6,9 @@ Hi there, welcome to my personal repository about Python. Python is an easy to l
 
 ## Folder Structure
 
+- 📂 [challenges](#challenges)
+  - 📁 [codewars](./challenges/codewars/)
+  - 📁 [leetcode](./challenges/leetcode/)
 - 📂 [learning](#learning)
   - 📁 [azure](./learning/azure/)
     - 📁 [cognitive-services-speech-sdk](./learning/azure/cognitive-services-speech-sdk/)
@@ -23,10 +26,14 @@ Hi there, welcome to my personal repository about Python. Python is an easy to l
 
 ## About Folder Structure
 
+### [challenges](./challenges/)
+
+Contains solved coding challenges and exercises from platforms like LeetCode, Codewars, Coderpad and more. Here you’ll find problems covering algorithms, data structures, and problem-solving techniques, with solutions to help improve coding skills and logical thinking.
+
 ### [learning](./learning/)
 
-This repository contains learning materials, code examples, and exercises to help you master Python. Here you'll find useful content covering Python fundamentals, advanced topics, and practical applications.
+Contains learning materials, code examples, and exercises to help you master Python. Here you'll find useful content covering Python fundamentals, advanced topics, and practical applications.
 
 ### [projects](./projects/)
 
-This folder contains various Python projects showcasing different concepts, techniques, and real-world applications. Each project is designed to help reinforce learning and demonstrate practical use cases of Python.
+Contains various Python projects showcasing different concepts, techniques, and real-world applications. Each project is designed to help reinforce learning and demonstrate practical use cases of Python.
