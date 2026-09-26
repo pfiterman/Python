@@ -61,7 +61,7 @@ interview_answers = {
 }
 
                          
-text = interview_answers["any_questions_for_us"]
+text = interview_answers["tell_me_about_yourself"]
 
 # Synthesizes the received text to speech.
 # The synthesized speech is expected to be heard on the speaker with this line executed.
