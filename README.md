@@ -1,39 +1,87 @@
+<div align="center">
+
 # Python
 
-## Introduction
+**A curated, version-controlled knowledge base documenting a structured journey through data analytics.**
 
-Hi there, welcome to my personal repository about Python. Python is an easy to learn, powerful programming language. It has efficient high-level data structures and a simple but effective approach to object-oriented programming. Python’s elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms.
+Course notes · hands-on labs · graded assessments · Jupyter notebooks · real datasets
 
-## Folder Structure
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](#technologies)
+[![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white)](#technologies)
+[![pandas](https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white)](#technologies)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)](#technologies)
 
-- 📂 [challenges](#challenges)
-  - 📁 [codewars](./challenges/codewars/)
-  - 📁 [leetcode](./challenges/leetcode/)
-- 📂 [learning](#learning)
-  - 📁 [azure](./learning/azure/)
-    - 📁 [cognitive-services-speech-sdk](./learning/azure/cognitive-services-speech-sdk/)
-  - 📁 [codeacademy](./learning/codeacademy/)
-  - 📁 [documentation](./learning/documentation/)
-  - 📁 [harvard](./learning/harvard/)
-    - 📁 [cs50-web-programming-with-python-and-javascript](./learning/harvard/cs50-web-programming-with-python-and-javascript)
-  - 📁 [meta](./learning/meta/)
-    - 📁 [programming-in-python](./learning//meta/programming-in-python/)
-  - 📁 [roboticview](./learning/roboticview/)
-  - 📁 [ufto](./learning//ufto/)
-    - 📁 [crafting-quality-code](./learning/ufto/crafting-quality-code/)
-    - 📁 [learn-to-program-fundamentals](./learning/ufto/learn-to-program-fundamentals/)
-- 📂 [projects](#projects)
+[![Status](https://img.shields.io/badge/status-actively%20maintained-brightgreen?style=flat-square)](#learning-philosophy)
 
-## About Folder Structure
+</div>
 
-### [challenges](./challenges/)
+---
 
-Contains solved coding challenges and exercises from platforms like LeetCode, Codewars, Coderpad and more. Here you’ll find problems covering algorithms, data structures, and problem-solving techniques, with solutions to help improve coding skills and logical thinking.
+## Overview
 
-### [learning](./learning/)
+This repository collects the complete body of work produced in my journey as a Python developer: challenges, scripts, courses, and hands-on projects. Everything here was written or completed by hand and is committed as it is produced, so the history doubles as a learning log.
 
-Contains learning materials, code examples, and exercises to help you master Python. Here you'll find useful content covering Python fundamentals, advanced topics, and practical applications.
+It is written to be useful to more than one reader: as a personal reference for revision, as a study companion for anyone working through the same curriculum, and as a portfolio of practical work backed by runnable notebooks and real data.
 
-### [projects](./projects/)
+---
 
-Contains various Python projects showcasing different concepts, techniques, and real-world applications. Each project is designed to help reinforce learning and demonstrate practical use cases of Python.
+## Repository Structure
+
+Only the top levels are shown. Every course follows the same internal layout, so the pattern below repeats.
+
+```
+Python/
+├── challenges/
+│   ├── codewars/
+│   ├── leetcode/
+├── learning/
+│   ├── azure/
+│   |   └── cognitive-services-speech-sdk/
+│   ├── codeacademy/
+│   ├── documentation/
+│   ├── havard/
+|   |   └── ccs50-web-programming-with-python-and-javascript/
+│   ├── meta/
+|   |   └── programming-in-python/
+│   ├── roboticview/
+│   ├── ufto/
+|   |   └── crafting-quality-code/
+|   |   └── learn-to-program-fundamentals/
+└── projects/
+```
+
+---
+
+## Learning Philosophy
+
+Knowledge that is not written down decays. This repository treats learning the way software is treated: work in small, reviewable increments, commit each one with a descriptive message, and keep the artefact next to the reasoning that produced it.
+
+Every concept is paired with something executable — a notebook, a query, a workbook, a script. Solutions are kept even when imperfect, because the value is in the record of how a problem was approached, not only in the final answer.
+
+---
+
+## Contributing
+
+This is a personal learning archive, so pull requests that add course content are not expected. Corrections and improvements, however, are genuinely welcome:
+
+- 🐛 **Found an error?** Open an issue naming the file and describing what is incorrect.
+- 💡 **Have a better approach?** Issues suggesting cleaner solutions or clearer explanations are appreciated.
+- 📝 **Spotted a typo or broken link?** A small pull request is the fastest fix.
+
+---
+
+## Author
+
+**Pablo Fiterman**
+
+[![GitHub](https://img.shields.io/badge/GitHub-@pfiterman-181717?style=flat-square&logo=github)](https://github.com/pfiterman)
+
+Documenting my journey as a Python Developer — from courses, challenges and Python scripts. Questions, corrections, and suggestions are welcome via [issues](https://github.com/pfiterman/Python/issues).
+
+<div align="center">
+
+---
+
+⭐ If this repository helps your own studies, consider starring it.
+
+</div>
