@@ -34,19 +34,21 @@ Python/
 ├── challenges/
 │   ├── codewars/
 │   ├── leetcode/
-├── learning/
-│   ├── azure/
-│   |   └── cognitive-services-speech-sdk/
+├── courses/
 │   ├── codeacademy/
-│   ├── documentation/
 │   ├── havard/
 |   |   └── ccs50-web-programming-with-python-and-javascript/
 │   ├── meta/
 |   |   └── programming-in-python/
-│   ├── roboticview/
 │   ├── ufto/
 |   |   └── crafting-quality-code/
 |   |   └── learn-to-program-fundamentals/
+├── learning/
+│   ├── azure/
+│   |   └── cognitive-services-speech-sdk/
+│   ├── documentation/
+│   ├── outlier/
+│   ├── roboticview/
 └── projects/
 ```
 
