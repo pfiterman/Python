@@ -49,6 +49,9 @@ Python/
 │   ├── documentation/
 │   ├── outlier/
 │   ├── roboticview/
+├── sketches/
+├── util/
+│   ├── 001-convert-png-transparent-to-webp/
 └── projects/
 ```
 
